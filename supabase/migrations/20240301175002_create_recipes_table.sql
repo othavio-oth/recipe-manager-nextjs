@@ -3,6 +3,7 @@ create table if not exists recipes (
     name text not null,
     duration int not null,
     description text not null,
+    instructions text not null,
     created_at timestamp with time zone default now() not null,
     updated_at timestamp with time zone default now() not null,
     deleted_at timestamp with time zone
