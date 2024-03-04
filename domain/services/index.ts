@@ -6,9 +6,8 @@ export const services =  ()=>{
 
     const services = {
         ingredients: {
-            list: async () => {
-                return await Ingredient.get(supabase);
-            }
+            list:  () => Ingredient.list(supabase),
+            get: (id:string) => Ingredient.get(supabase)(id),
         }
     }
     return services;
