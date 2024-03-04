@@ -11,9 +11,10 @@ export const services = () => {
   const services = {
     ingredients: {
       list: () => Ingredient.list(supabase),
-      id: (id: string) => (
-        Ingredient.get(supabase)(id), Ingredient.remove(supabase)(id)
-      ),
+      id: (id: string) => ({
+        get: () => Ingredient.get(supabase)(id),
+        delete: () => Ingredient.remove(supabase)(id),
+      }),
       create: (ingredient: IngredientSummary) =>
         Ingredient.create(supabase)(ingredient),
     },
