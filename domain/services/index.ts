@@ -1,15 +1,22 @@
-import { createClient } from '@supabase/supabase-js'
-import * as Ingredient from './ingredient'
+import { createClient } from "@supabase/supabase-js";
+import * as Ingredient from "./ingredient/service";
+import { IngredientSummary } from "./ingredient/types/IngredientSummary";
 
-export const services =  ()=>{
-    const supabase = createClient(process.env.NEXT_PUBLIC_SUPABASE_URL!!, process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!!)
+export const services = () => {
+  const supabase = createClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!!,
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!!
+  );
 
-    const services = {
-        ingredients: {
-            list:  () => Ingredient.list(supabase),
-            get: (id:string) => Ingredient.get(supabase)(id),
-        }
-    }
-    return services;
-
-}
+  const services = {
+    ingredients: {
+      list: () => Ingredient.list(supabase),
+      id: (id: string) => (
+        Ingredient.get(supabase)(id), Ingredient.remove(supabase)(id)
+      ),
+      create: (ingredient: IngredientSummary) =>
+        Ingredient.create(supabase)(ingredient),
+    },
+  };
+  return services;
+};
