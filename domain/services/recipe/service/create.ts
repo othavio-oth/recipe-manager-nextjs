@@ -6,7 +6,16 @@ export const create =
     const { data, error } = await supabase
       .from("recipes")
       .insert(recipe)
-      .select(`*`)
+      .select(
+        `
+      *,
+      ingredient_recipes (
+        ingredient(name),
+        unit_of_measurement(name),
+        amount
+      )
+      `
+      )
       .single();
     if (error) throw error;
     return data;
