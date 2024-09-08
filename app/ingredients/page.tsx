@@ -1,4 +1,3 @@
-"use client";
 import { services } from "@/domain/services";
 import Link from "next/link";
 const Ingredients = async () => {

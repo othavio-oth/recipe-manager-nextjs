@@ -5,11 +5,11 @@ const RecipeDetails = async ({ params }: { params: { id: string } }) => {
   const recipe = await services().recipes.id(recipeId).get();
 
   return (
-    <>
-      <h1>{recipe?.name}</h1>
-      <p>{recipe?.description}</p>
-      <p>{recipe?.instructions}</p>
-      <p>{recipe?.duration} minutes</p>
+    <div className="flex flex-col">
+      <h1 className="text-4xl mb-4">{recipe?.name}</h1>
+      <p>Description: {recipe?.description}</p>
+      <p> Instructions: {recipe?.instructions}</p>
+      <p> Duration: {recipe?.duration} minutes</p>
       Ingredients:
       <ul>
         {recipe?.ingredient_recipes.map((ingredient: any) => (
@@ -19,7 +19,7 @@ const RecipeDetails = async ({ params }: { params: { id: string } }) => {
           </li>
         ))}
       </ul>
-    </>
+    </div>
   );
 };
 export default RecipeDetails;
